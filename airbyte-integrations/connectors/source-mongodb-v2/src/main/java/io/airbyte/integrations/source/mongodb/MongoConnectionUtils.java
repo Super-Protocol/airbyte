@@ -50,7 +50,10 @@ public class MongoConnectionUtils {
   }
 
   private static String buildConnectionString(final MongoDbSourceConfig config) {
-    return MongoDbDebeziumPropertiesManager.buildConnectionString(config.rawConfig(), true);
+    String connectionString = MongoDbDebeziumPropertiesManager.buildConnectionString(config.rawConfig(), true);
+    connectionString = connectionString.replace("ssl=true", "ssl=false");
+    connectionString = connectionString.replace("tls=true", "tls=false");
+    return connectionString;
   }
 
 }
